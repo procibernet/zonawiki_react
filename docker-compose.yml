@@ -1,0 +1,13 @@
+version: "3"
+services:
+  reactzona:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      HOST: 0.0.0.0
+      PATH: "/usr/src/app/node_modules/.bin:$PATH"
+    command: "npm start"
