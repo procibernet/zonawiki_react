@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Form from './Form.js';
 import Server from './Server.js'
-
+import { Button } from 'react-bootstrap';
 
 class App extends Component {
   render() {
@@ -11,6 +11,7 @@ class App extends Component {
       <div className="App">
       <Form />
       <Server />
+      <Button variant="primary">Primary</Button>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
