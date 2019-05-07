@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Form from './Form.js';
 import Server from './Server.js'
+import Routerr from './Routerr.js'
+
 import { Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -12,6 +14,7 @@ class App extends Component {
       <Form />
       <Server />
       <Button variant="primary">Primary</Button>
+      <Routerr />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
