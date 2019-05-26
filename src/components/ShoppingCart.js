@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'react-bootstrap';
-
-const styles = {
-  footer: {
-    fontWeight: 'bold'
-  }
-}
-
+import { Card, Button } from 'react-bootstrap';
 
 class ShoppingCart extends Component {
   constructor() {
@@ -20,24 +13,28 @@ class ShoppingCart extends Component {
 
   render() {
     return (
-      <Table fill>
-        <tbody>
-          {this.state.cart.map(product =>
-            <tr key={product.id}>
-              <td>{product.name}</td>
-              <td className="text-right">${product.price}</td>
-              <td className="text-right"><Button bsSize="xsmall" bsStyle="danger" onClick={() => this.removeFromCart(product)}></Button></td>
-            </tr>
-          )}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan="4" style={styles.footer}>
-              Total: ${this.state.cart.reduce((sum, product) => sum + product.price, 0)}
-            </td>
-          </tr>
-        </tfoot>
-      </Table>
+      <Card>
+        <Card.Header>Shopping Cart</Card.Header>
+        <Card.Body>
+          <blockquote className="blockquote mb-0">
+            <p>
+            {this.state.cart.map(product =>
+              <ul key={product.id}>
+                <li>{product.name}</li>
+                <li className="text-right">${product.price}</li>
+                <li className="text-right">
+                  <Button bsSize="xsmall" bsStyle="danger" onClick={() => this.removeFromCart(product)}></Button>
+                </li>
+              </ul>
+            )}
+            </p>
+            <footer >
+              Total:
+                ${this.state.cart.reduce((sum, product) => sum + product.price, 0)}
+            </footer>
+          </blockquote>
+        </Card.Body>
+      </Card>
     )
   }
 
