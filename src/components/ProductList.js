@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import store from '../store'
 
 const styles = {
   products_styles: {
@@ -25,11 +26,15 @@ class ProductList extends Component {
     return (
       <div style={styles.products_styles}>
         {this.state.products.map(product =>
-          <Card style={{ width: '19rem' }}>
+          <Card style={{ width: '19rem' }} key={product.id}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
-              <Button variant="primary">${product.price}</Button>
+              <Button variant="primary"
+                onClick={() => this.addToCart(product)}
+              >
+                ${product.price}
+              </Button>
             </Card.Body>
           </Card>
         )}
@@ -38,7 +43,10 @@ class ProductList extends Component {
   }
 
   addToCart(product) {
-
+    store.dispatch({
+      type: "ADD_TO_CART",
+      product: product
+    });
   }
 }
 

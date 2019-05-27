@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Table } from 'react-bootstrap';
+import store from '../store'
 
 class ShoppingCart extends Component {
   constructor() {
@@ -9,6 +10,12 @@ class ShoppingCart extends Component {
     this.state = {
       cart: []
     }
+
+    store.subscribe(() => {
+      this.setState({
+        cart: store.getState().cart
+      });
+    });
   }
 
   render() {
@@ -17,17 +24,25 @@ class ShoppingCart extends Component {
         <Card.Header>Shopping Cart</Card.Header>
         <Card.Body>
           <blockquote className="blockquote mb-0">
-            <p>
-            {this.state.cart.map(product =>
-              <ul key={product.id}>
-                <li>{product.name}</li>
-                <li className="text-right">${product.price}</li>
-                <li className="text-right">
-                  <Button bsSize="xsmall" bsStyle="danger" onClick={() => this.removeFromCart(product)}></Button>
-                </li>
-              </ul>
-            )}
-            </p>
+            <Table striped bordered hover variant="dark">
+              <tbody>
+                {this.state.cart.map(product =>
+                  <tr key={product.id}>
+                    <td>{product.name}</td>
+                    <td>${product.price}</td>
+                    <td>
+                      <Button
+                        onClick={() => this.removeFromCart(product)}
+                        variant="outline-danger"
+                        size="sm"
+                      >
+                        Remove
+                      </Button>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
             <footer >
               Total:
                 ${this.state.cart.reduce((sum, product) => sum + product.price, 0)}
@@ -39,7 +54,10 @@ class ShoppingCart extends Component {
   }
 
   removeFromCart(product) {
-
+    store.dispatch({
+      type: "REMOVE_PRODUCT",
+      product: product
+    });
   }
 }
 
