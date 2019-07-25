@@ -3,7 +3,7 @@
 Setup:
 
 ```
-$ git clone https://github.com/jairorjuela/zonawiki_react
+$ git clone https://github.com/procibernet/zonawiki_react.git
 
 $ sudo docker-compose build
 
